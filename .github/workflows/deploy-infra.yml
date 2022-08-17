@@ -32,6 +32,15 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
           aws-region: ${{ env.AWS_REGION }}
+      - name: Locate distribution ID/
+        run: |
+          ID=$(aws cloudfront list-distributions \
+          --query "DistributionList.Items[*].{id:Id,origin:Origins.Items[0].Id}[?origin=='clientAppS3Origin'].id" \
+          --output text)
+          echo "DISTRIBUTION_ID=$(echo $ID)" >> $GITHUB_ENV
+        shell: bash
+      - name: Test
+        run: echo $DISTRIBUTION_ID
       - name: Deploy to AWS
         uses: reggionick/s3-deploy@v3
         with:
