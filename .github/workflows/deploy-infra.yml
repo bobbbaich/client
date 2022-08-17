@@ -34,6 +34,7 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
       - name: Deploy to AWS
         run: |
+          pip install -U awscli
           aws s3 sync ./build s3://${{ env.ENVIRONMENT }}-client-app \
             --recursive \
             --delete
