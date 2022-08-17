@@ -9,7 +9,7 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.tsx</code> and save to reload. <br/>
-          Update check cache.
+          Update check cache - invalidated by pipeline.
         </p>
         <a
           className="App-link"

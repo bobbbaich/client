@@ -49,3 +49,5 @@ jobs:
           bucket-region: ${{ env.AWS_REGION }}
           delete-removed: true
           private: true
+          dist-id: ${{ env.DISTRIBUTION_ID }}
+          invalidation: /
