@@ -33,9 +33,10 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
           aws-region: ${{ env.AWS_REGION }}
       - name: Deploy to AWS
-        run: |
-          pip install -U awscli
-          aws s3 sync ./build s3://${{ env.ENVIRONMENT }}-client-app \
-            --recursive \
-            --delete
-        shell: bash
+        uses: reggionick/s3-deploy@v3
+        with:
+          folder: build
+          bucket: ${{ env.ENVIRONMENT }}-client-app
+          bucket-region: ${{ env.AWS_REGION }}
+          delete-removed: true
+          private: true
