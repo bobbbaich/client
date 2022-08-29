@@ -13,7 +13,7 @@ function App() {
                     Edit <code>src/App.tsx</code> and save to reload. <br/>
                     Update check cache - invalidated by pipeline in the pool.
                 </p>
-                <p>Cache has been invalidated</p>
+                <p>Cache has been invalidated - 22:06 - 29/08/2022</p>
                 <a
                     className="App-link"
                     href="https://reactjs.org"

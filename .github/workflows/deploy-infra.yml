@@ -35,7 +35,7 @@ jobs:
       - name: Locate distribution ID/
         run: |
           ID=$(aws cloudfront list-distributions \
-          --query "DistributionList.Items[*].{id:Id,origin:Origins.Items[0].Id}[?origin=='clientAppS3Origin'].id" \
+          --query "DistributionList.Items[?Origins.Items[?Id=='clientAppS3Origin']].Id" \
           --output text)
           echo "DISTRIBUTION_ID=$(echo $ID)" >> $GITHUB_ENV
         shell: bash
