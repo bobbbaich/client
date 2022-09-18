@@ -34,7 +34,7 @@ export const rewardSlice = createSlice({
   initialState,
   reducers: {
     create: state => {
-      console.log("create")
+      console.log("create" + state.status)
     }
   },
   extraReducers: (builder) => {
