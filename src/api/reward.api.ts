@@ -11,12 +11,12 @@ export const rewardAPI = {
     return http.get<Reward>(`/rewards/${id}`);
   },
 
-  create(data: Reward) {
-    return http.post<Reward>("/rewards", data);
+  create(reward: Reward) {
+    return http.post<Reward>("/rewards", reward);
   },
 
-  update(data: Reward, id: string) {
-    return http.put<string>(`/rewards/${id}`, data);
+  update(reward: Reward, id: string) {
+    return http.put<string>(`/rewards/${id}`, reward);
   },
 
   delete(id: string) {

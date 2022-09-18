@@ -1,4 +1,4 @@
 export interface Reward {
-  uuid: string;
+  uuid?: string;
   name: string;
 }

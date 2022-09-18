@@ -18,8 +18,10 @@ export interface RewardState {
 const initialState: RewardState = {
   rewards: {
     content: [],
-    page: 0,
-    size: 0,
+    number: 0,
+    numberOfElements: 0,
+    totalElements: 0,
+    totalPages: 0,
   },
   status: ClientState.IDLE,
 };
@@ -29,14 +31,15 @@ export const readAll = createAsyncThunk(
     async () => rewardAPI.readAll()
 )
 
+export const createReward = createAsyncThunk(
+    'reward/create',
+    async (reward: Reward) => rewardAPI.create(reward)
+)
+
 export const rewardSlice = createSlice({
   name: 'reward',
   initialState,
-  reducers: {
-    create: state => {
-      console.log("create" + state.status)
-    }
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
     .addCase(readAll.pending, state => {
@@ -49,11 +52,23 @@ export const rewardSlice = createSlice({
     .addCase(readAll.rejected, (state) => {
       state.status = ClientState.FAILED;
     });
+
+    builder
+    .addCase(createReward.pending, state => {
+      state.status = ClientState.LOADING;
+    })
+    .addCase(createReward.fulfilled, (state, action) => {
+      console.log("created " + action.payload.data)
+      state.status = ClientState.IDLE;
+    })
+    .addCase(createReward.rejected, (state) => {
+      state.status = ClientState.FAILED;
+    });
   }
 })
 
-export const {create} = rewardSlice.actions;
+export default rewardSlice.reducer;
+
+// export const {} = rewardSlice.actions;
 
 export const selectRewards = (state: RootState) => state.reward.rewards;
-
-export default rewardSlice.reducer;
