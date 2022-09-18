@@ -1,8 +1,8 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {RootState} from "../../app/store";
-import {Reward} from "../../model/reward";
-import {rewardAPI} from "../../api/reward.api";
-import {Page} from "../../model/page";
+import {RootState} from "./common/store";
+import {Reward} from "../model/reward";
+import {rewardAPI} from "../api/reward.api";
+import {Page} from "../model/page";
 
 export enum ClientState {
   IDLE,

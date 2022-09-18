@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
-import {useAppDispatch, useAppSelector} from "../../app/hooks";
-import {create, readAll, selectRewards} from "./rewardSlice";
+import {useAppDispatch, useAppSelector} from "../../redux/common/hooks";
+import {create, readAll, selectRewards} from "../../redux/rewardSlice";
 
 export function Rewards() {
   const dispatch = useAppDispatch();
@@ -9,7 +9,7 @@ export function Rewards() {
   useEffect(() => {
     console.log("hi hello")
     dispatch(readAll())
-  }, [rewards])
+  }, [])
 
   return (
       <div>
@@ -18,7 +18,6 @@ export function Rewards() {
           {rewards.content.length >= 0 && rewards.content.map(it => <p key={it.uuid}>{JSON.stringify(it)}</p>)}
         </div>
         <button onClick={() => {
-          // dispatch(readAll());
           dispatch(create());
         }
         }>Load rewards

@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {Rewards} from "./features/reward/Rewards";
+import {Rewards} from "./feature/reward/Rewards";
 
 function App() {
   return (
