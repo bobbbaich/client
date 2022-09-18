@@ -8,18 +8,18 @@ export const rewardAPI = {
   },
 
   read(id: string) {
-    return http.get<Reward>(`/rewards/${id}`);
+    return http.get<Reward>(`/api/reward/gifts/${id}`);
   },
 
   create(reward: Reward) {
-    return http.post<Reward>("/rewards", reward);
+    return http.post<Reward>("/api/reward/gifts", reward);
   },
 
   update(reward: Reward, id: string) {
-    return http.put<string>(`/rewards/${id}`, reward);
+    return http.put<string>(`/api/reward/gifts/${id}`, reward);
   },
 
   delete(id: string) {
-    return http.delete<string>(`/rewards/${id}`);
+    return http.delete<string>(`/api/reward/gifts/${id}`);
   },
 }
