@@ -1,4 +1,4 @@
-import {Reward} from "../model/reward";
+import {CreateReward, Reward} from "../model/reward";
 import http from "./http-common";
 import {Page} from "../model/page";
 
@@ -7,19 +7,19 @@ export const rewardAPI = {
     return http.get<Page<Reward>>("/api/reward/gifts");
   },
 
-  read(id: string) {
-    return http.get<Reward>(`/api/reward/gifts/${id}`);
+  read(uuid: string) {
+    return http.get<Reward>(`/api/reward/gifts/${uuid}`);
   },
 
-  create(reward: Reward) {
+  create(reward: CreateReward) {
     return http.post<Reward>("/api/reward/gifts", reward);
   },
 
-  update(reward: Reward, id: string) {
-    return http.put<string>(`/api/reward/gifts/${id}`, reward);
+  update(uuid: string, reward: Reward) {
+    return http.put<string>(`/api/reward/gifts/${uuid}`, reward);
   },
 
-  delete(id: string) {
-    return http.delete<string>(`/api/reward/gifts/${id}`);
+  delete(uuid: string) {
+    return http.delete<string>(`/api/reward/gifts/${uuid}`);
   },
 }
