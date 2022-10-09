@@ -2,9 +2,10 @@ import {Action, configureStore, ThunkAction} from '@reduxjs/toolkit';
 import rewardReducer from '../rewardSlice';
 
 export const store = configureStore({
-  reducer: {
-    reward: rewardReducer,
-  },
+    reducer: {
+        reward: rewardReducer,
+    },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });
 
 export type AppDispatch = typeof store.dispatch;

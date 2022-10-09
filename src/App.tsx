@@ -1,22 +1,29 @@
 import React from 'react';
 import './App.css';
-import {Rewards} from "./feature/reward/Rewards";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-import {Col, Container, Row} from "react-bootstrap";
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+import {createTheme, ThemeProvider} from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 import {Header} from "./feature/header/Header";
+import {Footer} from "./feature/footer/Footer";
+import Rewards from "./feature/reward/Rewards";
+
+const theme = createTheme();
 
 function App() {
     return (
         <div className="App">
-            <Container>
-                <Row>
-                    <Header></Header>
-                </Row>
-                <Row>
-                    <Rewards/>
-                </Row>
-            </Container>
+            <ThemeProvider theme={theme}>
+                <CssBaseline/>
+                <Header/>
+
+                <Rewards/>
+
+                <Footer/>
+            </ThemeProvider>
         </div>
     );
 }

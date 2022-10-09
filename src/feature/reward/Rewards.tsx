@@ -1,51 +1,54 @@
-import React, {useEffect} from 'react';
-import {Col, Container, Row, Table} from 'react-bootstrap';
-import {useAppDispatch, useAppSelector} from "../../redux/common/hooks";
-import {readAll, selectRewards} from "../../redux/rewardSlice";
-import {RewardTableActions} from "./RewardTableActions";
+import {Box, Container} from "@mui/material";
+import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import React from "react";
+import {RewardCards} from "./RewardCards";
+import {RewardSideMenu} from "./RewardSideMenu";
+import {useAppDispatch} from "../../redux/common/hooks";
+import {toggleSideMenu} from "../../redux/rewardSlice";
 
-export function Rewards() {
+export default function Rewards() {
     const dispatch = useAppDispatch();
-    const rewards = useAppSelector(selectRewards);
-
-    useEffect(() => {
-        dispatch(readAll())
-    }, [])
 
     return (
-        <Container fluid>
-            <Row>
-                <Col>
-                    <h1 className="header">
-                        Rewards
-                    </h1>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    <Table striped={true}>
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>UUID</th>
-                            <th>Name</th>
-                            <th>Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {rewards.content.length > 0 && rewards.content.map((reward, index) => {
-                            return (
-                                <tr key={index + 1}>
-                                    <td>{index + 1}</td>
-                                    <td>{reward.uuid}</td>
-                                    <td>{reward.name}</td>
-                                    <td><RewardTableActions rewardUuid={reward.uuid}/></td>
-                                </tr>)
-                        })}
-                        </tbody>
-                    </Table>
-                </Col>
-            </Row>
-        </Container>
+        <main>
+            <Box
+                sx={{bgcolor: 'background.paper', pt: 8, pb: 6,}}>
+                <Container maxWidth="sm">
+                    <Typography
+                        component="h1"
+                        variant="h2"
+                        align="center"
+                        color="text.primary"
+                        gutterBottom
+                    >
+                        Rewards layout
+                    </Typography>
+                    <Typography variant="h5" align="center" color="text.secondary" paragraph>
+                        Something short and leading about the collection below—its contents,
+                        the creator, etc. Make it short and sweet, but not too short so folks
+                        don&apos;t simply skip over it entirely.
+                    </Typography>
+                    <Stack
+                        sx={{pt: 4}}
+                        direction="row"
+                        spacing={2}
+                        justifyContent="center"
+                    >
+                        <Button variant="contained" onClick={() => {
+                            dispatch(toggleSideMenu(true))
+                        }}>
+                            Create reward
+                        </Button>
+                        <Button variant="outlined">Secondary action</Button>
+                    </Stack>
+                </Container>
+            </Box>
+            <Container sx={{py: 8}} maxWidth="md">
+                <RewardCards/>
+                <RewardSideMenu/>
+            </Container>
+        </main>
     );
 }

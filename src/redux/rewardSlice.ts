@@ -1,8 +1,9 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "./common/store";
 import {Reward} from "../model/reward";
 import {rewardAPI} from "../api/reward.api";
 import {Page} from "../model/page";
+import {useAppDispatch} from "./common/hooks";
 
 export enum ClientState {
     IDLE,
@@ -12,36 +13,33 @@ export enum ClientState {
 
 export interface RewardState {
     rewards: Page<Reward>;
+    currentReward?: Reward
     status: ClientState;
+    sideMenu: SideMenuState;
+}
+
+export interface SideMenuState {
+    isOpen: boolean;
 }
 
 const initialState: RewardState = {
     rewards: {
-        content: [
-            {
-                uuid: "uuid_1",
-                name: "test_1"
-            },
-            {
-                uuid: "uuid_2",
-                name: "test_2"
-            },
-            {
-                uuid: "uuid_3",
-                name: "test_3"
-            },
-        ],
+        content: [],
         number: 0,
         numberOfElements: 0,
         totalElements: 0,
         totalPages: 0,
     },
     status: ClientState.IDLE,
+    sideMenu: {
+        isOpen: false
+    },
 };
 
-export const readAll = createAsyncThunk(
+export const readAllRewards = createAsyncThunk(
     'reward/readAll',
     async () => rewardAPI.readAll()
+        .then(it => it.data)
 )
 
 export const createReward = createAsyncThunk(
@@ -49,29 +47,51 @@ export const createReward = createAsyncThunk(
     async (reward: Reward) => rewardAPI.create(reward)
 )
 
-export const deleteReward = createAsyncThunk(
-    'reward/delete',
-    async (rewardUuid: string) => rewardAPI.delete(rewardUuid)
+export const readReward = createAsyncThunk(
+    'reward/read',
+    async (rewardUuid: string) => rewardAPI.read(rewardUuid)
+        .then(it => it.data)
 )
+
+// export const deleteReward = createAsyncThunk(
+//     'reward/delete',
+//     async (rewardUuid: string) => rewardAPI.delete(rewardUuid)
+// )
 
 export const rewardSlice = createSlice({
     name: 'reward',
     initialState,
-    reducers: {},
+    reducers: {
+        toggleSideMenu: (state, action: PayloadAction<boolean>) => {
+            state.sideMenu.isOpen = action.payload;
+            if (!state.sideMenu.isOpen) {
+                state.currentReward = initialState.currentReward;
+            }
+        },
+    },
     extraReducers: (builder) => {
         builder
-            .addCase(readAll.pending, state => {
+            .addCase(readAllRewards.pending, state => {
                 state.status = ClientState.LOADING;
-                console.log("readAll state.status=" + ClientState[state.status])
             })
-            .addCase(readAll.fulfilled, (state, action) => {
-                state.rewards = action.payload.data;
+            .addCase(readAllRewards.fulfilled, (state, action) => {
+                state.rewards = action.payload;
                 state.status = ClientState.IDLE;
-                console.log("readAll state.status=" + ClientState[state.status])
             })
-            .addCase(readAll.rejected, (state) => {
+            .addCase(readAllRewards.rejected, (state) => {
                 state.status = ClientState.FAILED;
-                console.log("readAll state.status=" + ClientState[state.status])
+            });
+
+        builder
+            .addCase(readReward.pending, state => {
+                state.status = ClientState.LOADING;
+            })
+            .addCase(readReward.fulfilled, (state, action) => {
+                state.currentReward = action.payload;
+                state.status = ClientState.IDLE;
+            })
+            .addCase(readReward.rejected, (state) => {
+                state.status = ClientState.FAILED;
             });
 
         builder
@@ -79,7 +99,6 @@ export const rewardSlice = createSlice({
                 state.status = ClientState.LOADING;
             })
             .addCase(createReward.fulfilled, (state, action) => {
-                console.log("created " + action.payload.data)
                 state.status = ClientState.IDLE;
             })
             .addCase(createReward.rejected, (state) => {
@@ -90,6 +109,9 @@ export const rewardSlice = createSlice({
 
 export default rewardSlice.reducer;
 
-// export const {} = rewardSlice.actions;
+export const {toggleSideMenu} = rewardSlice.actions;
 
 export const selectRewards = (state: RootState) => state.reward.rewards;
+export const selectCurrentReward = (state: RootState) => state.reward.currentReward;
+export const selectSideMenu = (state: RootState) => state.reward.sideMenu;
+export const selectStatus = (state: RootState) => state.reward.status;
