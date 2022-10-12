@@ -39,7 +39,7 @@ export function RewardForm() {
                     dispatch(readAllRewards())
                 })
                 .catch((error) => {
-                    // handle error here
+                    console.log("error " + JSON.stringify(error))
                 })
         },
     });

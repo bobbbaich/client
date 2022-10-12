@@ -12,14 +12,14 @@ export interface RewardCardActionsProps {
 export function RewardCardActions(props: RewardCardActionsProps) {
     const dispatch = useAppDispatch();
 
-    const submitDelete = (uuid: string) => (event: FormEvent) => {
+    const submitDelete = (uuid: string) => () => {
         dispatch(deleteReward(uuid))
             .then(() => {
                 dispatch(toggleDrawer(false))
                 dispatch(readAllRewards())
             })
             .catch((error) => {
-                // handle error here
+                console.log("error " + JSON.stringify(error))
             })
     };
 
