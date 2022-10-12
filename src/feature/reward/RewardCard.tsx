@@ -29,15 +29,14 @@ export function RewardCard(props: RewardCardProps) {
                 />
                 <CardContent sx={{flexGrow: 1}}>
                     <Typography gutterBottom variant="h5" component="h2">
-                        Heading
+                        {props.reward.name}
                     </Typography>
                     <Typography>
-                        {props.reward.uuid}
-                        This is a media card. You can use this section to describe the
-                        content.
+                        This is a reward card.<br/>
+                        With name <b>{props.reward.name}</b>.
                     </Typography>
                 </CardContent>
-                <RewardCardActions rewardUuid={props.reward.uuid}/>
+                {props.reward.uuid && <RewardCardActions rewardUuid={props.reward.uuid}/>}
             </Card>
         </Grid>
     );

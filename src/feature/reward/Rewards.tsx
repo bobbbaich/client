@@ -4,9 +4,9 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import React from "react";
 import {RewardCards} from "./RewardCards";
-import {RewardSideMenu} from "./RewardSideMenu";
+import {RewardDrawer} from "./RewardDrawer";
 import {useAppDispatch} from "../../redux/common/hooks";
-import {toggleSideMenu} from "../../redux/rewardSlice";
+import {toggleDrawer} from "../../redux/rewardSlice";
 
 export default function Rewards() {
     const dispatch = useAppDispatch();
@@ -36,9 +36,10 @@ export default function Rewards() {
                         spacing={2}
                         justifyContent="center"
                     >
-                        <Button variant="contained" onClick={() => {
-                            dispatch(toggleSideMenu(true))
-                        }}>
+                        <Button variant="contained"
+                                onClick={() => {
+                                    dispatch(toggleDrawer(true))
+                                }}>
                             Create reward
                         </Button>
                         <Button variant="outlined">Secondary action</Button>
@@ -47,7 +48,7 @@ export default function Rewards() {
             </Box>
             <Container sx={{py: 8}} maxWidth="md">
                 <RewardCards/>
-                <RewardSideMenu/>
+                <RewardDrawer/>
             </Container>
         </main>
     );

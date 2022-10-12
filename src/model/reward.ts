@@ -6,3 +6,7 @@ export interface Reward {
 export interface CreateReward {
     name: string;
 }
+
+export interface UpdateReward {
+    name: string;
+}

@@ -1,6 +1,6 @@
 import React from "react";
 import {useAppDispatch} from "../../redux/common/hooks";
-import {readReward, toggleSideMenu} from "../../redux/rewardSlice";
+import {readReward, toggleDrawer} from "../../redux/rewardSlice";
 import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
 
@@ -15,7 +15,7 @@ export function RewardCardActions(props: RewardTableActionsProps) {
         <CardActions>
             <Button size="small" onClick={() => {
                 dispatch(readReward(props.rewardUuid));
-                dispatch(toggleSideMenu(true));
+                dispatch(toggleDrawer(true));
             }}>
                 View
             </Button>
