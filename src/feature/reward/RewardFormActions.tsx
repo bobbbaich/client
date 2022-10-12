@@ -1,4 +1,4 @@
-import React, {FormEvent} from "react";
+import React from "react";
 import {useAppDispatch} from "../../redux/common/hooks";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
