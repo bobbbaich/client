@@ -9,22 +9,22 @@ import {createTheme, ThemeProvider} from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import {Header} from "./feature/header/Header";
 import {Footer} from "./feature/footer/Footer";
-import Rewards from "./feature/reward/Rewards";
+import {Link, Outlet} from "react-router-dom";
 
 const theme = createTheme();
 
 function App() {
     return (
-        <div className="App">
-            <ThemeProvider theme={theme}>
+        <ThemeProvider theme={theme}>
+            <div className="App">
                 <CssBaseline/>
                 <Header/>
-
-                <Rewards/>
-
+                <div>
+                    <Outlet/>
+                </div>
                 <Footer/>
-            </ThemeProvider>
-        </div>
+            </div>
+        </ThemeProvider>
     );
 }
 
