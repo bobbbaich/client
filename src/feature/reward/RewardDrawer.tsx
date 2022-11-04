@@ -1,7 +1,7 @@
 import React from 'react';
 import {Container, SwipeableDrawer} from "@mui/material";
 import {useAppDispatch, useAppSelector} from "../../redux/common/hooks";
-import {selectDrawer, toggleDrawer} from "../../redux/rewardSlice";
+import {selectDrawer, toggleDrawer} from "../../redux/reward.slice";
 import {RewardForm} from "./RewardForm";
 
 export function RewardDrawer() {

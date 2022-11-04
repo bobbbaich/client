@@ -3,7 +3,7 @@ import {useAppDispatch} from "../../redux/common/hooks";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import {Reward} from "../../model/reward";
-import {deleteReward, readAllRewards, toggleDrawer} from "../../redux/rewardSlice";
+import {deleteReward, readAllRewards, toggleDrawer} from "../../redux/reward.slice";
 
 export interface RewardCardActionsProps {
     reward?: Reward,

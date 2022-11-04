@@ -1,6 +1,6 @@
 import React from "react";
 import {useAppDispatch} from "../../redux/common/hooks";
-import {readReward, toggleDrawer} from "../../redux/rewardSlice";
+import {readReward, toggleDrawer} from "../../redux/reward.slice";
 import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
 

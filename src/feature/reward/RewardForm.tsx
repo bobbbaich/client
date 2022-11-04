@@ -1,8 +1,8 @@
 import React from 'react';
 import {useAppDispatch, useAppSelector} from "../../redux/common/hooks";
 import {useFormik} from "formik";
-import {rewardValidationSchema} from "../../model/rewardValidation";
-import {createReward, readAllRewards, selectReward, toggleDrawer, updateReward} from "../../redux/rewardSlice";
+import {rewardValidationSchema} from "../../validation/reward.validation";
+import {createReward, readAllRewards, selectReward, toggleDrawer, updateReward} from "../../redux/reward.slice";
 import {CreateReward, Reward} from "../../model/reward";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";

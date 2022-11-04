@@ -6,7 +6,7 @@ import React from "react";
 import {RewardCards} from "./RewardCards";
 import {RewardDrawer} from "./RewardDrawer";
 import {useAppDispatch} from "../../redux/common/hooks";
-import {toggleDrawer} from "../../redux/rewardSlice";
+import {toggleDrawer} from "../../redux/reward.slice";
 
 export default function Rewards() {
     const dispatch = useAppDispatch();

@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "../../redux/common/hooks";
 import Grid from "@mui/material/Grid";
-import {readAllRewards, selectRewards} from "../../redux/rewardSlice";
+import {readAllRewards, selectRewards} from "../../redux/reward.slice";
 import {RewardCard} from "./RewardCard";
 
 export function RewardCards() {

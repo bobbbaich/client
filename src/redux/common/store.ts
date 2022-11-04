@@ -1,5 +1,5 @@
 import {Action, configureStore, ThunkAction} from '@reduxjs/toolkit';
-import rewardReducer from '../rewardSlice';
+import rewardReducer from '../reward.slice';
 
 export const store = configureStore({
     reducer: {

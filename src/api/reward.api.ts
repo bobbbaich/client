@@ -1,10 +1,10 @@
 import {CreateReward, UpdateReward, Reward} from "../model/reward";
 import http from "./http-common";
-import {Page} from "../model/page";
+import {PageResponse} from "../model/pageResponse";
 
 export const rewardAPI = {
     readAll() {
-        return http.get<Page<Reward>>("/api/reward/gifts");
+        return http.get<PageResponse<Reward>>("/api/reward/gifts");
     },
 
     read(uuid: string) {

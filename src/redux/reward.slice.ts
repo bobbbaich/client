@@ -2,7 +2,7 @@ import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "./common/store";
 import {CreateReward, Reward, UpdateReward} from "../model/reward";
 import {rewardAPI} from "../api/reward.api";
-import {Page} from "../model/page";
+import {PageResponse} from "../model/pageResponse";
 
 export enum ClientState {
     IDLE,
@@ -12,7 +12,7 @@ export enum ClientState {
 
 export interface RewardState {
     reward?: Reward;
-    rewards: Page<Reward>;
+    rewards: PageResponse<Reward>;
     status: ClientState;
     drawer: DrawerState;
 }
