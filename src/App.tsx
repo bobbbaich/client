@@ -9,7 +9,7 @@ import {createTheme, ThemeProvider} from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import {Header} from "./feature/header/Header";
 import {Footer} from "./feature/footer/Footer";
-import {Link, Outlet} from "react-router-dom";
+import {Outlet} from "react-router-dom";
 
 const theme = createTheme();
 
