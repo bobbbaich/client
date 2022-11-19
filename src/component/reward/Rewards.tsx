@@ -7,8 +7,9 @@ import {RewardCards} from "./RewardCards";
 import {RewardDrawer} from "./RewardDrawer";
 import {useAppDispatch} from "../../redux/common/hooks";
 import {toggleDrawer} from "../../redux/reward.slice";
+import withAuth from "../auth/WithAuth";
 
-export default function Rewards() {
+function Rewards() {
     const dispatch = useAppDispatch();
 
     return (
@@ -53,3 +54,5 @@ export default function Rewards() {
         </main>
     );
 }
+
+export default withAuth(Rewards)

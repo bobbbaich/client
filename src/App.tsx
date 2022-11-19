@@ -7,9 +7,11 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import {createTheme, ThemeProvider} from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import {Header} from "./feature/header/Header";
-import {Footer} from "./feature/footer/Footer";
+import {Header} from "./component/header/Header";
+import {Footer} from "./component/footer/Footer";
 import {Outlet} from "react-router-dom";
+import '@aws-amplify/ui-react/styles.css';
+import withAuth from "./component/auth/WithAuth";
 
 const theme = createTheme();
 
@@ -28,4 +30,4 @@ function App() {
     );
 }
 
-export default App;
+export default withAuth(App);

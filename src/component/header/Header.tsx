@@ -13,6 +13,8 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Cloud';
 import {HOME_PATH, REWARDS_PATH} from "../../router/paths";
+import {useNavigate} from "react-router";
+import {useAuthenticator} from "@aws-amplify/ui-react";
 
 const APPLICATION_TITLE = 'Cloub';
 
@@ -21,9 +23,9 @@ const pages = [
     {title: 'Rewards', path: REWARDS_PATH},
 ];
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-
 export function Header() {
+    const navigate = useNavigate();
+    const {user, signOut} = useAuthenticator((context) => [context.user, context.signOut]);
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
@@ -38,8 +40,18 @@ export function Header() {
         setAnchorElNav(null);
     };
 
+    const onNavMenuItemClick = (path: string) => {
+        handleCloseNavMenu();
+        navigate(path);
+    }
+
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
+    };
+
+    const onUserMenuItemSignOut = () => {
+        handleCloseUserMenu();
+        signOut();
     };
 
     return (
@@ -50,8 +62,9 @@ export function Header() {
                     <Typography
                         variant="h6"
                         noWrap
-                        component="a"
-                        href={HOME_PATH}
+                        onClick={() => onNavMenuItemClick(HOME_PATH)}
+                        // component="a"
+                        // href={HOME_PATH}
                         sx={{
                             mr: 2,
                             display: {xs: 'none', md: 'flex'},
@@ -94,11 +107,12 @@ export function Header() {
                             }}
                         >
                             {pages.map((page) => (
-                                <MenuItem key={page.title} onClick={handleCloseNavMenu}>
+                                <MenuItem key={page.title}
+                                          onClick={() => onNavMenuItemClick(page.path)}>
                                     <Typography
-                                        component="a"
+                                        // component="a"
                                         noWrap
-                                        href={page.path}
+                                        // href={page.path}
                                         textAlign="center"
                                         sx={{
                                             mr: 2,
@@ -138,8 +152,8 @@ export function Header() {
                         {pages.map((page) => (
                             <Button
                                 key={page.title}
-                                href={page.path}
-                                onClick={handleCloseNavMenu}
+                                // href={page.path}
+                                onClick={() => onNavMenuItemClick(page.path)}
                                 sx={{my: 2, color: 'white', display: 'block'}}
                             >
                                 {page.title}
@@ -150,7 +164,7 @@ export function Header() {
                     <Box sx={{flexGrow: 0}}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg"/>
+                                <Avatar alt={user && user.attributes?.name} src="/static/images/avatar/2.jpg"/>
                             </IconButton>
                         </Tooltip>
                         <Menu
@@ -169,11 +183,9 @@ export function Header() {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
-                            {settings.map((setting) => (
-                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center">{setting}</Typography>
-                                </MenuItem>
-                            ))}
+                            <MenuItem onClick={onUserMenuItemSignOut}>
+                                <Typography textAlign="center">Sign Out</Typography>
+                            </MenuItem>
                         </Menu>
                     </Box>
                 </Toolbar>

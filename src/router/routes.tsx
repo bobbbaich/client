@@ -1,9 +1,9 @@
 import React from 'react';
 
-import Rewards from "../feature/reward/Rewards";
-import SignIn from "../feature/signin/SignIn";
+import Rewards from "../component/reward/Rewards";
 import App from "../App";
-import {HOME_PATH, REWARDS_PATH, SIGN_IN_PATH} from "./paths";
+import {HOME_PATH, LOGIN_PATH, REWARDS_PATH} from "./paths";
+import {Login} from "../component/auth/Login";
 
 export const routes = [
     {
@@ -17,7 +17,7 @@ export const routes = [
         ]
     },
     {
-        path: SIGN_IN_PATH,
-        element: <SignIn/>,
+        path: LOGIN_PATH,
+        element: <Login/>,
     }
 ];
