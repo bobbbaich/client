@@ -73,7 +73,7 @@
 }
 
 .asyncButton:active:after {
-  width: 0%;
+  width: 0;
   opacity: 1;
   transition: 0s;
 }
