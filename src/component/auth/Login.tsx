@@ -22,7 +22,7 @@ export function Login() {
 
     return (
         <View className="auth-wrapper">
-            <Authenticator signUpAttributes={['email']}></Authenticator>
+            <Authenticator signUpAttributes={['email', 'name']}></Authenticator>
         </View>
     );
 }
