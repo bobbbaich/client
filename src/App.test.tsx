@@ -1,15 +1,11 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import { store } from './redux/common/store';
-import App from './App';
+import {render} from '@testing-library/react';
+import Copyright from './component/footer/Copyright';
 
 test('renders learn react link', () => {
-  const { getByText } = render(
-    <Provider store={store}>
-      <App />
-    </Provider>
-  );
+    const {getByText} = render(
+        <Copyright/>
+    );
 
-  expect(getByText(/Cloub/i)).toBeInTheDocument();
+    expect(getByText(/Manager/i)).toBeInTheDocument();
 });

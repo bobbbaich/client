@@ -10,7 +10,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import {Header} from "./component/header/Header";
 import {Footer} from "./component/footer/Footer";
 import {Outlet} from "react-router-dom";
-import '@aws-amplify/ui-react/styles.css';
 import withAuth from "./component/auth/WithAuth";
 
 const theme = createTheme();

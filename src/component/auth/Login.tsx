@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react';
 
 import {Authenticator, useAuthenticator, View} from '@aws-amplify/ui-react';
-import '@aws-amplify/ui-react/styles.css';
 
 import {useLocation, useNavigate} from 'react-router';
 import {HOME_PATH} from "../../router/paths";
