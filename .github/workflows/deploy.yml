@@ -30,7 +30,7 @@ jobs:
           echo "Build, tag, and push image to Amazon ECR"
           REACT_APP_AWS_REGION=${{ secrets.REACT_APP_AWS_REGION }} \
           REACT_APP_COGNITO_USER_POOL_ID=${{ secrets.REACT_APP_COGNITO_USER_POOL_ID }} \
-          REACT_APP_COGNITO_APP_CLIENT_ID=${{ secrets.REACT_APP_COGNITO_APP_CLIENT_ID } \
+          REACT_APP_COGNITO_APP_CLIENT_ID=${{ secrets.REACT_APP_COGNITO_APP_CLIENT_ID }} \
           npm run build
       - name: Login to AWS
         uses: aws-actions/configure-aws-credentials@v1
