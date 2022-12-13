@@ -128,4 +128,3 @@ export const {toggleDrawer} = rewardSlice.actions;
 export const selectReward = (state: RootState) => state.reward.reward;
 export const selectRewards = (state: RootState) => state.reward.rewards;
 export const selectDrawer = (state: RootState) => state.reward.drawer;
-export const selectStatus = (state: RootState) => state.reward.status;

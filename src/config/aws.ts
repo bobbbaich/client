@@ -1,5 +1,5 @@
 export const COGNITO = {
-    REGION: "us-east-1",
-    USER_POOL_ID: "us-east-1_j7tgwJwe3",
-    APP_CLIENT_ID: "71v6dfkm3lbk2nisths62edd2t",
+    REGION: process.env.REACT_APP_AWS_REGION,
+    USER_POOL_ID: process.env.REACT_APP_COGNITO_USER_POOL_ID,
+    APP_CLIENT_ID: process.env.REACT_APP_COGNITO_APP_CLIENT_ID,
 };

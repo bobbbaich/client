@@ -15,9 +15,8 @@ const getHeaders = async (): Promise<AxiosRequestHeaders> => {
 export const http = {
     async authClient() {
         return axios.create({
-            // baseURL: "https://cors-anywhere.herokuapp.com/https://development.cloudbohdan.click",
-            // baseURL: "http://localhost:8080",
-            headers: await getHeaders()
+            headers: await getHeaders(),
+            baseURL: process.env.NODE_ENV === 'development' ? "http://localhost:8080" : window.location.hostname,
         })
     }
 }
