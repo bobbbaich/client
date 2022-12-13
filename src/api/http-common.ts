@@ -14,7 +14,7 @@ const getHeaders = async (): Promise<AxiosRequestHeaders> => {
 
 export const http = {
     async authClient() {
-        let config: AxiosRequestConfig = {
+        const config: AxiosRequestConfig = {
             headers: await getHeaders(),
         };
         if (process.env.NODE_ENV === 'development') config.baseURL = "http://localhost:8080";
