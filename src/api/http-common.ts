@@ -1,4 +1,4 @@
-import axios, {AxiosRequestHeaders} from "axios";
+import axios, {AxiosRequestConfig, AxiosRequestHeaders} from "axios";
 import {Auth} from "aws-amplify";
 
 const getJwtToken = (): Promise<string> => Auth.currentSession()
@@ -14,9 +14,10 @@ const getHeaders = async (): Promise<AxiosRequestHeaders> => {
 
 export const http = {
     async authClient() {
-        return axios.create({
+        let config: AxiosRequestConfig = {
             headers: await getHeaders(),
-            baseURL: process.env.NODE_ENV === 'development' ? "http://localhost:8080" : window.location.hostname,
-        })
+        };
+        if (process.env.NODE_ENV === 'development') config.baseURL = "http://localhost:8080";
+        return axios.create(config)
     }
 }
