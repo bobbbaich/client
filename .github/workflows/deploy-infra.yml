@@ -10,8 +10,8 @@ env:
   AWS_REGION: us-east-1
 
 jobs:
-  deploy-infrastructure:
-    name: Deploy Infrastructure
+  deploy-client:
+    name: Deploy client application
     environment: development
     runs-on: ubuntu-latest
     steps:
@@ -28,24 +28,24 @@ jobs:
       - name: Generate build
         run: |
           echo "Build, tag, and push image to Amazon ECR"
-          npm run build \
           REACT_APP_AWS_REGION=${{ secrets.REACT_APP_AWS_REGION }} \
           REACT_APP_COGNITO_USER_POOL_ID=${{ secrets.REACT_APP_COGNITO_USER_POOL_ID }} \
-          REACT_APP_COGNITO_APP_CLIENT_ID=${{ secrets.REACT_APP_COGNITO_APP_CLIENT_ID }}
+          REACT_APP_COGNITO_APP_CLIENT_ID=${{ secrets.REACT_APP_COGNITO_APP_CLIENT_ID } \
+          npm run build
       - name: Login to AWS
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
           aws-region: ${{ env.AWS_REGION }}
-      - name: Locate distribution ID/
+      - name: Locate distribution ID
         run: |
           ID=$(aws cloudfront list-distributions \
           --query "DistributionList.Items[?Origins.Items[?Id=='clientAppS3Origin']].Id" \
           --output text)
           echo "DISTRIBUTION_ID=$(echo $ID)" >> $GITHUB_ENV
         shell: bash
-      - name: Test
+      - name: Print distribution
         run: echo $DISTRIBUTION_ID
       - name: Deploy to AWS
         uses: reggionick/s3-deploy@v3

@@ -11,8 +11,6 @@ export default function withAuth<T>(Component: ComponentType<T>) {
         const location = useLocation();
 
         useEffect(() => {
-            console.log("withAuth useEffect route=", route)
-            console.log(location)
             if (route !== 'authenticated') {
                 navigate(LOGIN_PATH, {state: {from: location}});
             }
