@@ -32,7 +32,8 @@ jobs:
           REACT_APP_COGNITO_USER_POOL_ID=${{ secrets.REACT_APP_COGNITO_USER_POOL_ID }} \
           REACT_APP_COGNITO_APP_CLIENT_ID=${{ secrets.REACT_APP_COGNITO_APP_CLIENT_ID }} \
           npm run build
-      - name: Login to AWS
+      - id: login-aws
+        name: Login to AWS
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_ID }}
@@ -51,7 +52,7 @@ jobs:
         uses: reggionick/s3-deploy@v3
         with:
           folder: build
-          bucket: ${{ env.ENVIRONMENT }}-client-app
+          bucket: ${{ env.ENVIRONMENT }}-client-app-${{ steps.login-aws.outputs.aws-account-id }}
           bucket-region: ${{ env.AWS_REGION }}
           delete-removed: true
           private: true
