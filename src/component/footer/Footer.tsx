@@ -15,7 +15,7 @@ export function Footer() {
                 color="text.secondary"
                 component="p"
             >
-                Something here to give the footer a purpose!
+                Something here to give the footer a purpose and meaning!
             </Typography>
             <Copyright/>
         </Box>
