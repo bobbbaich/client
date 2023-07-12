@@ -51,7 +51,7 @@ jobs:
       - name: Deploy to AWS
         uses: reggionick/s3-deploy@v3
         with:
-          folder: ./client/build
+          folder: build
           bucket: ${{ env.ENVIRONMENT }}-client-app-${{ steps.login-aws.outputs.aws-account-id }}
           bucket-region: ${{ env.AWS_REGION }}
           delete-removed: true
