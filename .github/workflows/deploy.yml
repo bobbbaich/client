@@ -27,10 +27,10 @@ jobs:
         run: npm test
       - name: Generate build
         run: |
-          echo "Build, tag, and push image to Amazon ECR"
+          echo "Build, tag, and push image to Amazon ECR"  \
           REACT_APP_AWS_REGION=${{ secrets.REACT_APP_AWS_REGION }} \
-          REACT_APP_COGNITO_USER_POOL_ID=${{ secrets.REACT_APP_COGNITO_USER_POOL_ID }} \
-          REACT_APP_COGNITO_APP_CLIENT_ID=${{ secrets.REACT_APP_COGNITO_APP_CLIENT_ID }} \
+          REACT_APP_COGNITO_USER_POOL_ID=$(aws ssm get-parameter --name "/${{ env.EnvironmentName }}/CognitoUserPoolId" --query "Parameter.Value" --output text) \
+          REACT_APP_COGNITO_APP_CLIENT_ID=$(aws ssm get-parameter --name "/${{ env.EnvironmentName }}/CognitoClientId" --query "Parameter.Value" --output text) \
           npm run build
       - id: login-aws
         name: Login to AWS
