@@ -25,13 +25,6 @@ jobs:
         run: npm install
       - name: Test
         run: npm test
-      - name: Generate build
-        run: |
-          echo "Build, tag, and push image to Amazon ECR"  \
-          REACT_APP_AWS_REGION=${{ secrets.REACT_APP_AWS_REGION }} \
-          REACT_APP_COGNITO_USER_POOL_ID=$(aws ssm get-parameter --name "/${{ env.EnvironmentName }}/CognitoUserPoolId" --query "Parameter.Value" --output text) \
-          REACT_APP_COGNITO_APP_CLIENT_ID=$(aws ssm get-parameter --name "/${{ env.EnvironmentName }}/CognitoClientId" --query "Parameter.Value" --output text) \
-          npm run build
       - id: login-aws
         name: Login to AWS
         uses: aws-actions/configure-aws-credentials@v1
@@ -39,6 +32,13 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
           aws-region: ${{ env.AWS_REGION }}
+      - name: Generate build
+        run: |
+          echo "Configure and build application"  \
+          REACT_APP_AWS_REGION=${{ secrets.REACT_APP_AWS_REGION }} \
+          REACT_APP_COGNITO_USER_POOL_ID=$(aws ssm get-parameter --name "/${{ env.EnvironmentName }}/CognitoUserPoolId" --query "Parameter.Value" --output text) \
+          REACT_APP_COGNITO_APP_CLIENT_ID=$(aws ssm get-parameter --name "/${{ env.EnvironmentName }}/CognitoClientId" --query "Parameter.Value" --output text) \
+          npm run build
       - name: Locate distribution ID
         run: |
           ID=$(aws cloudfront list-distributions \
